@@ -1,0 +1,161 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+
+long int max=2133333333, min=-2133333333;
+
+long int func_4_to_10 (long int n);
+long int func_10_to_4 (long int n);
+long int k_chisel (long int n);
+long int exponentiation (long int a, long int n);
+long int false_sum (long int n, long int m);
+long int false_sub (long int n, long int m);
+long int false_pr (long int n, long int m);
+long int false_pow (long int n);
+
+int main()
+{   
+    long int a_4, b_4, a_10, b_10, f, res;
+    scanf ("%ld %ld", &a_4, &b_4);
+    a_10 = func_4_to_10 (a_4);
+    b_10 = func_4_to_10 (b_4);
+
+    /* Решение по действиям a^2*b–b(b–a)+b */
+    f=false_sub(b_10, a_10);
+    if (f==0){
+        f=false_pow (a_10);
+        if (f==0){
+            f=false_pr((a_10*a_10), b_10);
+            if (f==0){
+                f=false_pr (b_10, (b_10-a_10));
+                if (f==0){
+                    f=false_sub ((a_10*a_10*b_10), (b_10*(b_10-a_10)));
+                    if (f==0){
+                        f=false_sum((a_10*a_10*b_10 - b_10*(b_10 - a_10)), b_10);
+                        if (f==0){
+                            res =a_10*a_10*b_10 - b_10*(b_10 - a_10) + b_10;
+                            printf ("%ld\n", func_10_to_4(res));
+                        }
+                        else 
+                            printf ("!%ld\n", f);
+                    }
+                    else 
+                        printf ("!%ld\n", f);
+                }
+                else 
+                    printf ("!%ld\n", f);
+            }
+            else
+                printf ("!%ld\n", f);
+        }
+        else 
+            printf ("!%ld\n", f);
+    }
+    else 
+        printf ("!%ld\n", f);
+    return 0;
+}
+
+long int func_4_to_10 (long int n)
+{
+    long int i=k_chisel(n), m[i], p_10, p_4, res=0; 
+    for (i; i>0; i--){
+        p_10=exponentiation(10, i-1);
+        p_4=exponentiation(4, i-1);
+        m[i]=(n/p_10)%10;
+        res+=m[i]*p_4;
+    }
+    return res;
+}
+
+long int func_10_to_4 (long int n)
+{
+    long int i=0, res=0, m, m_, n_;
+    while (n/4!=0){
+    m=n-((n/4)*4);
+    n/=4;
+    m_=m*exponentiation (10, i);
+    res+=m_;
+    i+=1;
+    }
+    n_=n*exponentiation (10, i);
+    res+=n_;
+    return res;
+}
+
+long int k_chisel (long int n)
+{   
+    long int k=10, i=1;
+    while (n/k!=0){
+        i+=1;
+        k*=10;
+    }
+    return i;
+}
+
+long int exponentiation (long int a, long int n)
+{
+    long int i, res=a;
+    if (n==0)
+        return 1;
+    else if (n==1)
+        return a;
+    else if(n>1){
+    for (i=2; i<=n; i++){
+        res*=a;
+    }
+    return res;
+    }
+}
+
+long int false_sum (long int n, long int m)
+{
+    if ((func_4_to_10(max)-m<n)||(func_4_to_10(min)-m>n))
+        return 1;
+    else 
+        return 0;
+}
+
+long int false_sub (long int n, long int m)
+{
+    if ((func_4_to_10(min)+m>n)||(func_4_to_10(max)-m<n))
+        return 2;
+    else
+        return 0;
+}
+
+long int false_pr (long int a, long int b)
+{
+    long int m, n;
+    if (a>=0)
+        n=a;
+    else 
+        n=-a;
+    if (b>=0)
+        m=b;
+    else
+        m=-b;
+    if (func_4_to_10(max)/m<n)
+        return 3;
+    else 
+        return 0;
+}
+
+long int false_pow (long int a)
+{
+    long int n;
+    if (a>=0)
+        n=a;
+    else 
+        n=-a;
+    if (func_4_to_10(max)/n<n)
+        return 4;
+    else 
+        return 0;
+}

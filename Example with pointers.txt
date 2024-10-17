@@ -1,0 +1,35 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+
+void func_third (int *n_3){
+    *n_3+=1;
+    printf ("2 -- %d\n", *n_3);
+}
+
+void func_second (int *n_2){
+    *n_2+=1;
+    printf ("2 -- %d\n", *n_2);   
+    func_third (n_2);
+}
+
+void func_first (int *n_1){
+    *n_1+=1;
+    printf ("1 -- %d\n", *n_1);
+    func_second (n_1);
+} 
+
+int main()
+{
+    int n;
+    scanf ("%d", &n);
+    func_first (&n);
+    printf ("%d\n", n);
+    return 0;
+}

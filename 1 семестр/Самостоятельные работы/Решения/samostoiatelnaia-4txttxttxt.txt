@@ -1,0 +1,36 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    float i, n, sum, a, edinicha, r, k, b;
+    edinicha=1.0;
+    scanf ("%f", &n);
+    for (i=1; i<=n; i++){
+        a=(1/(i*(i+1)));
+        sum+=a;
+    }
+    k=0;
+    b=0;
+    r=edinicha-sum;
+    while (b==0){
+        b=(int)r*10;
+        r*=10;
+        if (b==0)
+            k+=1;
+    }
+    k-=1;
+    printf ("%.8f\n", edinicha);
+    printf ("%.8f\n", sum);
+    printf ("%.8f\n", edinicha-sum);
+    printf ("%.0f\n", k);
+    return 0;
+}
